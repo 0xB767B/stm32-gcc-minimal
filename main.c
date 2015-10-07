@@ -1,3 +1,5 @@
+#include <stdint.h>
+
 #define STACK_TOP 0x20000800
 
 void nmi_handler(void);
@@ -5,12 +7,12 @@ void hardfault_handler(void);
 int main(void);
 
 // Define the vector table
-unsigned int * myvectors[4] 
+uint32_t* myvectors[4] 
 __attribute__ ((section("vectors")))= {
-    (unsigned int *)	STACK_TOP,         // stack pointer
-    (unsigned int *) 	main,              // code entry point
-    (unsigned int *)	nmi_handler,       // NMI handler (not really)
-    (unsigned int *)	hardfault_handler  // hard fault handler (let's hope not)
+  (uint32_t*)STACK_TOP,        // stack pointer
+  (uint32_t*)main,             // code entry point
+  (uint32_t*)nmi_handler,      // NMI handler
+  (uint32_t*)hardfault_handler // hard fault handler
 };
 
 int main(void) {
