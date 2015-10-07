@@ -26,3 +26,5 @@ main.o: main.c
 	@ echo ".compiling"
 	$(CC) $(CFLAGS) main.c
 
+debug: all
+	ddd --debugger arm-none-eabi-gdb
